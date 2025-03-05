@@ -1,7 +1,6 @@
 # V2Coder: A Non-Autoregressive Vocoder Based on Hierarchical Variational Autoencoders
 **Takato Fujimoto, Kei Hashimoto, Yoshihiko Nankaku, Keiichi Tokuda**
 
-[PyTorch](https://pytorch.org/) implementation of V2Coder.
 Visit our [website](https://www.sp.nitech.ac.jp/~taka19/demos/v2coder-demo/) for audio samples.
 
 ## Setup
@@ -15,11 +14,34 @@ Visit our [website](https://www.sp.nitech.ac.jp/~taka19/demos/v2coder-demo/) for
     pip3 install -r requirements.txt
     ```
 ## Training
+The audio files and the file list are organized as follows:
 ```
-CORPUS=<path to corpus> python train.py --config_file config.yaml --checkpoint_dir checkpoints
++-- CORPUS_NAME
+|   --- training.txt
+|   +-- wavs
+|       +-- speaker1
+|            --- spkr1_file1.wav
+|            --- spkr1_file2.wav
+|            ...
+|       --- file1.wav
+|       --- file2.wav
+|       ...
+```
+The contents of the file list (training.txt) should include entries like:
+```
+speaker1/spkr1_file1
+speaker1/spkr1_file2
+...
+file1
+file2
+...
+```
+To start the training, run the following command:
+```
+CORPUS=CORPUS_NAME python train.py --config_file config.yaml --checkpoint_dir checkpoints
 ```
 
 ## Inference
 ```
-python inference.py --checkpoint_file <checkpoint file> --input_dir <directory containing *.wav files> --output_dir <output directory>
+python inference.py --checkpoint_file checkpoints/latest.ckpt --input_dir test_wavs --output_dir generated_wavs
 ```

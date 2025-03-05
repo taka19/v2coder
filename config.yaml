@@ -1,0 +1,54 @@
+data:
+  root: ${CORPUS}/wavs
+  training_file: ${CORPUS}/training.txt
+  sample_rate: 22050
+  stft:
+    frame_shift: 256
+    frame_length: 1024
+    fft_length: 1024
+  msg:
+    num_mel_bins: 80
+    freq_range: [0, 8000]
+
+model:
+  hvae:
+    num_layers: [24, 24, 12, 4, 2, 2]
+    channels: [512, 256, 128, 64, 32, 16]
+    latent_channels: [32, 16, 8, 4, 2, 1]
+    kernel_size: 5
+    dilations: [1, 1]
+    up_factors: [4, 4, 4, 2, 2]
+    determ_blocks:
+      dilations: [1, 1, 1, 1, 1, 1]
+  log_decoder_precision: 18.0
+
+train:
+  constraint:
+    s: 0.0001
+    e: 0.2
+  skip_duration: 20000
+  optimizer:
+    vae:
+      lr: 2.0e-4
+      betas: [0.9, 0.98]
+      eps: 1.0e-8
+      weight_decay: 0.0
+    lagrange_multipliers:
+      lr: 1.0e-2
+      betas: [0.9, 0.98]
+      eps: 1.0e-8
+      weight_decay: 0.0
+      maximize: True
+  scheduler:
+    vae:
+      step_size: 1
+      gamma: 0.999
+
+  num_workers: 4
+  batch_size: 8
+  train_segment_size: 16384  # 64 frames * 256 samples
+  max_epochs: 2000
+  logging:
+    stdout: 100
+    summary: 100
+    checkpoint: 100000
