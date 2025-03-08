@@ -27,6 +27,8 @@ The audio files and the file list are organized as follows:
 |       --- file2.wav
 |       ...
 ```
+You can optionally create subdirectories, such as "speaker1", under the "wavs" directory.
+<br>
 The contents of the file list (training.txt) should include entries like:
 ```
 speaker1/spkr1_file1
