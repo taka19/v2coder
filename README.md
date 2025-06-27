@@ -1,6 +1,8 @@
 # V2Coder: A Non-Autoregressive Vocoder Based on Hierarchical Variational Autoencoders
 **Takato Fujimoto, Kei Hashimoto, Yoshihiko Nankaku, Keiichi Tokuda**
 
+In our [paper](https://ieeexplore.ieee.org/document/11014058), we proposed V2Coder, a non-autoregressive vocoder based on hierarchical variational autoencoders.<br>
+We provide our implementation in this repository.<br>
 Visit our [website](https://www.sp.nitech.ac.jp/~taka19/demos/v2coder-demo/) for audio samples.
 
 ## Setup
